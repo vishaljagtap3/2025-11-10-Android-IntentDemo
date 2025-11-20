@@ -8,9 +8,11 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -29,6 +31,43 @@ public class HomeActivity extends AppCompatActivity {
         initViews();
         processInput();
         setupListeners();
+        mt("onCreate");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mt("onStart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mt("onResume");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        mt("onRestart");
+    }
+
+    @Override
+    protected void onPause() {
+        mt("onPause");
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        mt("onStop");
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        mt("onDestroy");
+        super.onDestroy();
     }
 
     private void setupListeners() {
@@ -82,5 +121,10 @@ public class HomeActivity extends AppCompatActivity {
             txtCountry.setText(data.getStringExtra("country"));
             txtPoints.setText("" + data.getIntExtra("points", 0));
         }
+    }
+
+    private void mt(String text) {
+        Toast.makeText(this, text, Toast.LENGTH_LONG).show();
+        Log.e("tag", text);
     }
 }
